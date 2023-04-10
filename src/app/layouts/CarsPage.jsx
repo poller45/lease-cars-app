@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/page/Header";
 import Footer from "../components/page/Footer";
+import api from "../api";
+import Car from "../components/page/Car";
+import CarCategory from "../ui/CarCategory";
 const CarsPage = () => {
+	const [cars, setCars] = useState([]);
+	const [selectedCarClass, setSelectedCarClass] = useState();
+
+	useEffect(() => {
+		setCars(api.cars);
+	}, []);
+
+	const handleCarClassSelect = (item) => {
+		console.log(item);
+		setSelectedCarClass(item);
+	};
+	const filteredCars = selectedCarClass
+		? cars.filter((car) => car.carClass === selectedCarClass)
+		: cars;
+	console.log(filteredCars);
 	return (
 		<div className="wrapper">
 			<Header headerClass={""} />
@@ -10,170 +28,26 @@ const CarsPage = () => {
 					<div className="container">
 						<h2 className="section-title">Choose your car</h2>
 						<div className="tabs">
-							<div className="tabs__btn">
-								<button
-									className="tabs__btn-item tabs__btn-item--active"
-									data-button="content-1"
-								>
-									Car and Minivan
-								</button>
-								<button className="tabs__btn-item" data-button="content-2">
-									Trucks
-								</button>
-								<button className="tabs__btn-item" data-button="content-3">
-									Crossovers & SUVs
-								</button>
-								<button className="tabs__btn-item" data-button="content-4">
-									Electrified
-								</button>
-							</div>
+							<CarCategory
+								selectedItem={selectedCarClass}
+								onItemSelect={handleCarClassSelect}
+							/>
 							<div className="tabs__content">
 								<div
 									className="tabs__content-item tabs__content-item--active"
 									id="content-1"
 								>
-									<div className="card">
-										<img src="images/card-1.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Crown 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 650/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-2.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Prius Prime 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 450/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-3.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Prius 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 400/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-4.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Hyundai Kona 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 510/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-1.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Crown 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 650/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-2.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Prius Prime 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 450/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-3.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Prius 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 400/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-4.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Hyundai Kona 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 510/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-1.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Crown 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 650/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-2.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Prius Prime 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 450/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-3.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Toyota Prius 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 400/mo</p>
-										</div>
-										<a href="/" className="card__link">
-											see details
-										</a>
-									</div>
-									<div className="card">
-										<img src="images/card-4.jpg" alt="" className="card__img" />
-										<div className="card__content">
-											<h4 className="card__title">Hyundai Kona 2023</h4>
-											<p className="card__text">starting from $ 39900</p>
-											<p className="card__price">$ 510/mo</p>
-										</div>
-										<a href="/" class="card__link">
-											see details
-										</a>
-									</div>
+									<Car cars={filteredCars} />
 								</div>
 
 								<div className="tabs__content-item" id="content-2">
-									2
+									{selectedCarClass && <Car cars={filteredCars} />}
 								</div>
 								<div className="tabs__content-item" id="content-3">
-									3
+									{selectedCarClass && <Car cars={filteredCars} />}
 								</div>
 								<div className="tabs__content-item" id="content-4">
-									4
+									{selectedCarClass && <Car cars={filteredCars} />}
 								</div>
 							</div>
 						</div>
